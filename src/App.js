@@ -25,10 +25,57 @@ const arr = [
   },
 ]
 
+const arrDrawer = [
+  {
+    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+    price: '8 499 руб.',
+    imageUrl: '/img/sneakers/3.jpg',
+  },
+  {
+    title: 'Мужские Кроссовки Nike Air Max 270',
+    price: '12 999 руб.',
+    imageUrl: '/img/sneakers/2.jpg',
+  },
+]
+
 function App() {
   return (
     <div className="wrapper">
-      <Drawer />
+      <div className="overlay" style={{display: 'none'}}>
+        <div className="drawer">
+          <h2 className="delCor">
+            Корзина
+            <img className="buttomBtn" src="/img/remove.svg" alt="remove"/>
+          </h2>
+          <div className="items">
+            {arrDrawer.map((obj) => (
+              <Drawer
+                title={obj.title}
+                price={obj.price}
+                imageUrl={obj.imageUrl}
+              />
+            ))}
+          </div >
+          <div className="totalBlock">
+            <ul>
+              <li>
+                <span>Итого:</span>
+                <div></div>
+                <b>21 498 руб. </b>
+              </li>
+              <li>
+                <span>Налог 5%: </span>
+                <div></div>
+                <b>1074 руб. </b>
+              </li>
+            </ul>
+            <button className="greenButton">
+              Оформить заказ
+              <img src="/img/arrow.svg" alt="Arrow"/>
+            </button>
+          </div >
+        </div>
+      </div>
       <Header/>
       <div className="sneakers__container">
         <div className="content">
@@ -45,7 +92,8 @@ function App() {
                 title={obj.title}
                 price={obj.price}
                 imageUrl={obj.imageUrl}
-                onClick = {() => console.log(obj)}
+                onClickPlus = {() => console.log('Нажали на плюс')}
+                onFavorite = {() => console.log('Добавили в закладки')}
               />
             ))}
           </div >

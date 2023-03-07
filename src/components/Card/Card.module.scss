@@ -31,6 +31,11 @@
       div{
         display: flex;
         flex-direction: column;
+        span{
+          margin: 0 0 3px 0;
+          text-transform: uppercase;
+          color: #BDBDBD;
+        }
       }
       button{
         width: 32px;
