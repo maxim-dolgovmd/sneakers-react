@@ -1,14 +1,25 @@
 import styles from './Card.module.scss';
-console.log(styles);
+import React from 'react';
+
+// console.log(styles);
 
 function Card({
     title='',
     price,
     imageUrl,
-    onClickPlus,
     onFavorite,
-}) {
+}) 
+    {
+    const [isAdded, setIsAdded] = React.useState(false);
 
+    const onPlus = () => {
+        setIsAdded(!isAdded); // инвертация (true/false)
+    };
+
+    // React.useEffect(() => {
+    //     console.log('Переменная изменилась')
+    // },[isAdded]);
+    
     return(
         <div className={styles.card}>
             <div className={styles.favorite} onClick={onFavorite}>
@@ -21,9 +32,7 @@ function Card({
                     <span>Цена:</span>
                     <b>{price}</b>
                 </div>
-                <button onClick={onClickPlus}>
-                    <img width={11} height={11} src="/img/plus2.svg" alt="Plus2"/>
-                </button>
+                <img className={styles.plus} onClick={onPlus} src={isAdded ? "/img/btn-checked.svg" : "/img/btn-plus.svg"} alt="Plus2"/>
             </div>
         </div>
     )

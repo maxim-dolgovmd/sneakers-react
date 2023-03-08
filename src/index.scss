@@ -228,6 +228,7 @@ header{
   .headerRight li:first-child{
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   .headerRight span{
     margin-left: 10px;

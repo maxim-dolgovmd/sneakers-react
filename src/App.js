@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
+import React, { useCallback } from 'react';
 
 const arr = [
   {
@@ -39,44 +40,15 @@ const arrDrawer = [
 ]
 
 function App() {
+
+    // const [count, setCount] = React.useState(5);
+    const [cartOpened, setCartOpened] = React.useState(false);
+
+
   return (
     <div className="wrapper">
-      <div className="overlay" style={{display: 'none'}}>
-        <div className="drawer">
-          <h2 className="delCor">
-            Корзина
-            <img className="buttomBtn" src="/img/remove.svg" alt="remove"/>
-          </h2>
-          <div className="items">
-            {arrDrawer.map((obj) => (
-              <Drawer
-                title={obj.title}
-                price={obj.price}
-                imageUrl={obj.imageUrl}
-              />
-            ))}
-          </div >
-          <div className="totalBlock">
-            <ul>
-              <li>
-                <span>Итого:</span>
-                <div></div>
-                <b>21 498 руб. </b>
-              </li>
-              <li>
-                <span>Налог 5%: </span>
-                <div></div>
-                <b>1074 руб. </b>
-              </li>
-            </ul>
-            <button className="greenButton">
-              Оформить заказ
-              <img src="/img/arrow.svg" alt="Arrow"/>
-            </button>
-          </div >
-        </div>
-      </div>
-      <Header/>
+      {cartOpened ? <Drawer onClose = {() => setCartOpened(false)} /> : null}
+      <Header onClickCart = {() => setCartOpened(true)} />
       <div className="sneakers__container">
         <div className="content">
           <div className="search">
@@ -92,7 +64,6 @@ function App() {
                 title={obj.title}
                 price={obj.price}
                 imageUrl={obj.imageUrl}
-                onClickPlus = {() => console.log('Нажали на плюс')}
                 onFavorite = {() => console.log('Добавили в закладки')}
               />
             ))}
