@@ -1,5 +1,6 @@
 function Drawer({
-    onClose
+  onClose,
+  items=[],
 }) {
 
     return (
@@ -10,14 +11,16 @@ function Drawer({
             <img onClick={onClose} className="buttomBtn" src="/img/remove.svg" alt="remove"/>
           </h2>
           <div className="items">
-            <div className="cartItem">
-              <img width={70} height={70} src='/img/sneakers/2.jpg' alt="cartSneakers"/>
-              <div className="cartText">
-                  <p>Мужские Кроссовки Nike Air Max 270</p>
-                  <b>12 999 руб.</b>
+            {items.map((obj) => (
+              <div className="cartItem">
+                <img width={70} height={70} src={obj.imageUrl} alt="cartSneakers"/>
+                <div className="cartText">
+                  <p>{obj.title}</p>
+                  <b>{obj.price}</b>
+                </div>
+                <img  className="buttomBtn" src="/img/remove.svg" alt="remove"/>
               </div>
-              <img className="buttomBtn" src="/img/remove.svg" alt="remove"/>
-            </div>
+            ))}
           </div >
           <div className="totalBlock">
             <ul>

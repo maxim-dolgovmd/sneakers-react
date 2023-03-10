@@ -48,7 +48,7 @@ code {
 
 body{
   background-color: #E7F6FF;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .wrapper{
@@ -57,7 +57,7 @@ body{
   border-radius: 20px;
   max-width: 1080px;
   margin: 50px auto;
-  // padding: 40px 0 0 0;
+  // margin: 0px 0 50px 0;
 
   .overlay{
     position: absolute;
@@ -261,6 +261,14 @@ header{
     display: flex;
     border-radius: 10px;
     padding: 0 15px;
+    position: relative;
+    .clear{
+      position: absolute;
+      top: 13px;
+      right: 7px;
+      width: 18px;
+      height: 18px;
+    }
     input{
       border: 0;
       // padding: 10px;
@@ -271,7 +279,9 @@ header{
   }
   .sneakers{
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
   }
   
 }

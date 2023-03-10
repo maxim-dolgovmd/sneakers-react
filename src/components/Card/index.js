@@ -8,11 +8,13 @@ function Card({
     price,
     imageUrl,
     onFavorite,
+    onPlusButton,
 }) 
     {
     const [isAdded, setIsAdded] = React.useState(false);
 
     const onPlus = () => {
+        onPlusButton({title, price, imageUrl});
         setIsAdded(!isAdded); // инвертация (true/false)
     };
 
@@ -30,7 +32,7 @@ function Card({
             <div className={styles.cardbox}>
                 <div>
                     <span>Цена:</span>
-                    <b>{price}</b>
+                    <b>{price +' руб.'}</b>
                 </div>
                 <img className={styles.plus} onClick={onPlus} src={isAdded ? "/img/btn-checked.svg" : "/img/btn-plus.svg"} alt="Plus2"/>
             </div>
