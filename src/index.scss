@@ -193,6 +193,58 @@ body{
 }
 }
 
+.cartEmpty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  img{
+    margin: 0 0 20px 0;
+  }
+  p{
+    opacity: 6;
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .emptyBasket{
+    position: relative;
+    width: 245px;
+    height: 55px;
+    background: #9DD558;
+    border-radius: 18px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    transition: background 0.2s ease-in-out;
+    margin-top: 20px;
+  
+    &:hover{
+      background: lighten(#9DD558, 5%);
+    }
+    &:active{
+      background: darken(#9DD558, 5%);
+    }
+    &:hover{
+      img{
+        transform: translateX(5px);
+      }
+    }
+    img{
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}
+
+
+
+
 header{
   display: flex;
   justify-content: space-between;

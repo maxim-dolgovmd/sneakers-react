@@ -2,42 +2,43 @@ import Header from './components/Header';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
 import React from 'react';
+import axios from 'axios';
 
 // const arr 
 
-const arrDrawer = [
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: '8 499 руб.',
-    imageUrl: '/img/sneakers/3.jpg',
-  },
-  {
-    title: 'Мужские Кроссовки Nike Air Max 270',
-    price: '12 999 руб.',
-    imageUrl: '/img/sneakers/2.jpg',
-  },
-]
 
 function App() {
 
     const [items, setItems] = React.useState([])
 
     React.useEffect(() => {
-      fetch('https://6407e7872f01352a8a861eeb.mockapi.io/items')
-      .then((ren) => {
-        return ren.json()
+      axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/items').then((res)=> {
+        setItems(res.data);
       })
-      .then((json) => {
-        setItems(json)
+      axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/card').then((res)=> {
+        setCartItems(res.data);
       })
+      // fetch('https://6407e7872f01352a8a861eeb.mockapi.io/items')
+      //   .then((res) => {
+      //     return res.json()
+      //   })
+      //   .then((json) => {
+      //     setItems(json)
+      //   })
     }, []);
+    
     // const [count, setCount] = React.useState(5);
     const [cartOpened, setCartOpened] = React.useState(false);
 
     const [cartItems, setCartItems] = React.useState([]);
 
     const onAddToCart = (obj) => {
+      axios.post('https://6407e7872f01352a8a861eeb.mockapi.io/card', obj);
       setCartItems([...cartItems, obj]);
+    };
+
+    const onRemoveItem = (id) => {
+      axios.delete(`https://6407e7872f01352a8a861eeb.mockapi.io/card/${id}`);      
     };
 
     const [searchValue, setSearchValue] = React.useState('');
@@ -50,7 +51,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      {cartOpened ? <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} /> : null}
+      {cartOpened ? <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} onRemove={onRemoveItem} /> : null}
       <Header onClickCart = {() => setCartOpened(true)} />
       <div className="sneakers__container">
         <div className="content">
@@ -64,7 +65,7 @@ function App() {
           </div>
           <div className="sneakers">
             {items
-              .filter(item => item.title.includes(searchValue))
+              .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
               .map((obj, index)=> (
               <Card
                 key={index}
