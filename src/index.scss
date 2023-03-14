@@ -57,9 +57,11 @@ body{
   border-radius: 20px;
   max-width: 1080px;
   margin: 50px auto;
+  // overflow: hidden;
   // margin: 0px 0 50px 0;
 
   .overlay{
+    // overflow: hidden;
     position: absolute;
     left: 0;
     top: 0;
@@ -70,6 +72,7 @@ body{
 
     .drawer{
       position: absolute;
+      // overflow: hidden;
       width: 420px;
       height: 100%;
       right: 0;
@@ -78,6 +81,7 @@ body{
       padding: 30px;
       display: flex;
       flex-direction: column;
+      // justify-content: space-between;
 
       .delCor{
         display: flex;
@@ -99,11 +103,12 @@ body{
         &>div:not(:last-child){
           margin: 0 0 20px 0;
         }
-        flex: 1;
+        flex: 1 1 auto;
         overflow: auto;
         margin-bottom: 40px;
       }
       .totalBlock{
+        // flex: 0 0 auto;
         ul{
           margin-bottom: 24px;
           li{
@@ -172,6 +177,12 @@ body{
       }
     }
   }
+.delRodBlock{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .greenButton{
   // position: absolute;
   width: 100%;
@@ -199,12 +210,20 @@ body{
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  padding: 50% 0 0 0;
 
   img{
     margin: 0 0 20px 0;
   }
+  h2{
+    color: #000000;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0 0 10px 0;
+  }
   p{
-    opacity: 6;
+    opacity: 0.6;
     width: 280px;
     line-height: 24px;
   }
@@ -230,12 +249,12 @@ body{
     }
     &:hover{
       img{
-        transform: translateX(5px);
+        transform: translateX(-5px);
       }
     }
     img{
       position: absolute;
-      left: 20px;
+      left: 25px;
       top: 20px;
       transition: transform 0.2s ease-in-out;
     }

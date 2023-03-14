@@ -12,10 +12,16 @@ function Card({
 }) 
     {
     const [isAdded, setIsAdded] = React.useState(false);
+    const [isFavorite, setIsFavorite] = React.useState(false);
 
     const onPlus = () => {
         onPlusButton({title, price, imageUrl});
         setIsAdded(!isAdded); // инвертация (true/false)
+    };
+
+    const onClickFavorite = () => {
+        onFavorite({title, price, imageUrl});
+        setIsFavorite(!isFavorite);
     };
 
     // React.useEffect(() => {
@@ -24,8 +30,8 @@ function Card({
     
     return(
         <div className={styles.card}>
-            <div className={styles.favorite} onClick={onFavorite}>
-                <img src="/img/heart-unliked.svg"/>
+            <div className={styles.favorite} onClick={onClickFavorite}>
+                <img src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}/>
             </div>
             <img width={133} height={112} src={imageUrl} alt="Sneakers"/>
             <h5>{title}</h5>

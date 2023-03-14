@@ -19,7 +19,7 @@ function Drawer({
 
           {
             items.length > 0 ? (
-              <div><div className="items">
+              <div className='delRodBlock'><div className="items">
               {items.map((obj) => (
                 <div className="cartItem">
                   <img width={70} height={70} src={obj.imageUrl} alt="cartSneakers"/>
@@ -54,8 +54,8 @@ function Drawer({
             <img width='120px' height='120px' src='/img/drawer.svg' alt='drawer'/>
             <h2>Корзина пустая</h2>
             <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ</p>
-            <button className='emptyBasket'>
-              <img  src='/img/strlka.png' alt='strelka left'/>
+            <button onClick={onClose} className='emptyBasket'>
+              <img  src='/img/strelka.png' alt='strelka left'/>
               Вернуться назад
             </button>
           </div>
