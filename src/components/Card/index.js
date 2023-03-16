@@ -4,6 +4,7 @@ import React from 'react';
 // console.log(styles);
 
 function Card({
+    id,
     title='',
     price,
     imageUrl,
@@ -21,7 +22,7 @@ function Card({
     };
 
     const onClickFavorite = () => {
-        onFavorite({title, price, imageUrl});
+        onFavorite({id, title, price, imageUrl});
         setIsFavorite(!isFavorite);
     };
 

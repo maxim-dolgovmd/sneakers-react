@@ -21,7 +21,7 @@ function Drawer({
             items.length > 0 ? (
               <div className='delRodBlock'><div className="items">
               {items.map((obj) => (
-                <div className="cartItem">
+                <div className="cartItem" key={obj.id}>
                   <img width={70} height={70} src={obj.imageUrl} alt="cartSneakers"/>
                   <div className="cartText">
                     <p>{obj.title}</p>

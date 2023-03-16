@@ -26,12 +26,13 @@ function Home({
                 <Card
                   key={index}
                   title={obj.title}
+                  id={obj.id}
                   price={obj.price}
                   imageUrl={obj.imageUrl}
                   onFavorite={(obj) => onAddToFavorite(obj)}
                   onPlusButton={(obj) => onAddToCart(obj)}
                 />
-              ))}
+            ))}
           </div >
         </div>
       </div >
