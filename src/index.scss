@@ -136,6 +136,10 @@ body{
         
         .greenButton{
           position: relative;
+          &:disabled{
+            background-color: #bebebe;
+            cursor: default;
+          }
           &:hover{
             img{
               transform: translateX(5px);
@@ -179,7 +183,8 @@ body{
   }
 .delRodBlock{
   display: flex;
-  width: 100%;
+  // width: 100%;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
 }
