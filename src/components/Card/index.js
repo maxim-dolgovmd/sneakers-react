@@ -55,9 +55,9 @@ function Card({
                 <rect x="118" y="156" rx="10" ry="10" width="32" height="32" />
             </ContentLoader> : 
                 <>
-                    <div className={styles.favorite} onClick={onClickFavorite}>
+                    {onFavorite && <div className={styles.favorite} onClick={onClickFavorite}>
                         <img src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}/>
-                    </div>
+                    </div>}
                     <img width={133} height={112} src={imageUrl} alt="Sneakers"/>
                     <h5>{title}</h5>
                     <div className={styles.cardbox}>
@@ -65,12 +65,12 @@ function Card({
                             <span>Цена:</span>
                             <b>{price +' руб.'}</b>
                         </div>
-                        <img 
+                        {onPlusButton && <img 
                             className={styles.plus} 
                             onClick={onPlus} 
                             src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/btn-plus.svg"} 
                             alt="Plus2"
-                        />
+                        />}
                     </div>
                 </>
             }

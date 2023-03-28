@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import AppContext from './context';
+import Orders from './pages/Orders';
 
 function App() {
 
@@ -19,41 +20,54 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(true);
 
-  // const [itemCarts, setitemCarts] = React.useState([]);
-  
+  // cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
   React.useEffect(() => {
-    async function fetchData() {
-      const cartResponce = await axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/card')
-      const favoriteResponce = await axios.get('https://64101201864814e5b64653d6.mockapi.io/favorites')
-      const itemsResponce = await axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/items')
+    try {
+      async function fetchData() {
+        const cartResponce = await axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/card')
+        const favoriteResponce = await axios.get('https://64101201864814e5b64653d6.mockapi.io/favorites')
+        const itemsResponce = await axios.get('https://6407e7872f01352a8a861eeb.mockapi.io/items')
+  
+        setIsLoading(false);
+  
+        setCartItems(cartResponce.data)
+        setFavorites(favoriteResponce.data)
+        setItems(itemsResponce.data)
+      }
 
-      setIsLoading(false);
-
-      setCartItems(cartResponce.data)
-      setFavorites(favoriteResponce.data)
-      setItems(itemsResponce.data)
+      fetchData();
+    } catch (error) {
+      alert('Ошибка при получении данных с сервера')
+      console.error(error)
     }
-
-    fetchData();
   }, []);
 
   // const [count, setCount] = React.useState(5);
 
   const onAddToCart = async (obj) => {
-    console.log(obj);
-    if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
-      setCartItems(prev => prev.filter((item) => Number(item.id) !== Number(obj.id)));
-      axios.delete(`https://6407e7872f01352a8a861eeb.mockapi.io/card/${obj.id}`);
-    } else {
-      axios.post('https://6407e7872f01352a8a861eeb.mockapi.io/card', obj);
-      setCartItems(prev => [...prev, obj]);
+    try {
+      if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
+        setCartItems(prev => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+        await axios.delete(`https://6407e7872f01352a8a861eeb.mockapi.io/card/${obj.id}`);
+      } else {
+        setCartItems(prev => [...prev, obj]);
+        await axios.post('https://6407e7872f01352a8a861eeb.mockapi.io/card', obj);
+      }
+    } catch (error) {
+      alert('Ошибка, при добавлении товаров в корзину')
+      console.error(error)
     }
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://6407e7872f01352a8a861eeb.mockapi.io/card/${id}`);
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    try {
+      setCartItems(prev => prev.filter(item => item.id !== id));
+      axios.delete(`https://6407e7872f01352a8a861eeb.mockapi.io/card/${id}`);
+    } catch (error) {
+      alert('Ошибка, при удалении из корзины')
+      console.error(error)
+    }
   };
 
   const onAddToFavorite = async (obj) => {
@@ -66,7 +80,8 @@ function App() {
         setFavorites(prev => [...prev, data]);
       }
     } catch (error) {
-      alert('Не удалось добавить в alert');
+      alert('Не удалось добавить в фавориты');
+      console.error(error)
     }
   };
 
@@ -82,7 +97,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems}}>
+    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems, onAddToCart}}>
       <div className="wrapper">
         {cartOpened ? <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} added={true} /> : null}
         <Header onClickCart={() => setCartOpened(true)} />
@@ -100,6 +115,10 @@ function App() {
           <Route
             path="/favorites"
             element={<Favorites/>} 
+          />
+          <Route
+            path="/orders"
+            element={<Orders/>} 
           />
         </Routes>
       </div>
